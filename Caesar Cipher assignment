@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+int upperloop(int loopee);              //function declaration
+int lowerloop(int loopee2);             //function declaration
+
+int main(int argc, string argv[])       //prompt for key
+
+{
+//VERIFICATION OF INPUT//
+int i;
+int l = strlen(argv[1]);
+int x = 0;  // 0 means all elements are digits
+
+    for (i = 0; i < l; i++)                             //loop check if every element in key is a digits
+        {
+            if (isdigit(argv[1][i]) != 0)
+            {
+                ;
+            }
+            else
+            {
+                x = x + 1;
+            }
+        }
+
+    if (argc == 2 && x == 0)                            //verify key is singular & comprised of digits only
+    {
+
+       //begin encryption//
+       int k = atoi(argv[1]) % 26;      //initialising key
+
+        string input = get_string("Plaintext: ");   //prompt for plaintext input
+        int ptlength = strlen(input);
+printf("ciphertext: ");
+
+        for (int y = 0; y <= ptlength; y++)         //runnng through each element
+            {
+                if (isupper(input[y]) != 0)             //converting uppercase letters
+                {
+                    input[y] = input[y] + k;               
+                    char cypherelement = upperloop(input[y]);
+                    printf("%c", cypherelement);
+                }
+
+                else if (islower(input[y]) != 0)
+                {
+                    input[y] = input[y] + k;            //cpnverting lowercase letters
+                    char cypherelement = lowerloop(input[y]);
+                    printf("%c", cypherelement);
+
+                }
+
+                else
+                {
+                    input[y] = input[y];
+                    printf("%c", input[y]);
+
+                }
+
+            }
+
+            //for (int z = 0; z < ptlength; z++)              //PRINTING
+            //{
+              //  char cyphertext = upperloop(input[z]);
+                //printf("%c", cyphertext);
+            //}
+            printf("\n");
+    }
+
+    else
+    {
+        printf("Usage: ./caesar key\n");
+    }
+
+
+return 0;
+}
+
+/*Function to loop A-Z*/
+
+int upperloop(int loopee)
+{
+    int result;
+
+    if (loopee > 90)
+    {
+        result = loopee - 26;
+    }
+    else if (loopee < 65)
+    {
+        result = loopee + 26;
+    }
+    else
+    {
+        result = loopee;
+    }
+
+return result;
+}
+
+
+/*Function to loop a-z*/
+int lowerloop(int loopee2)
+{
+    int result;
+
+    if (loopee2 > 122)
+    {
+        result = loopee2 - 26;
+    }
+    else if (loopee2 < 97)
+    {
+        result = loopee2 + 26;
+    }
+    else
+    {
+        result = loopee2;
+    }
+
+return result;
+}
